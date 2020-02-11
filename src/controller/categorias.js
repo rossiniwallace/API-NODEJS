@@ -1,11 +1,12 @@
 const categoriaDAO = new (require('../models/Categorias'))()
 const { validationResult } = require('express-validator')
+
 module.exports = {
 
     async lista(req, res) {
         try {
             const categorias = await categoriaDAO.lista()
-            if (!categorias)
+            if (categorias.length == 0)
                 return res.status(404).send({ erro: 'Lista vazia' })
 
             res.send(categorias)
@@ -17,11 +18,9 @@ module.exports = {
 
     async inserir(req, res) {
 
-
-
         const erros = validationResult(req)
 
-        if (erros)
+        if (!erros.isEmpty()) 
 
             return res.status(400).send(erros)
         let categoria = req.body
