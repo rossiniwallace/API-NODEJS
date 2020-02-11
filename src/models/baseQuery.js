@@ -1,4 +1,4 @@
-const conexao = require('../../config/conexao-db')
+const conexao = require('../config/conexao-db')
 
 
 module.exports = (sql,params) =>{

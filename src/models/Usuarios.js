@@ -7,12 +7,21 @@ class Usuarios {
     }
 
     inserir(usuario) {
-        baseQuery('INSERT INTO usuario SET ?',usuario)
+        return baseQuery('INSERT INTO usuario SET ?',usuario)
     }
 
     buscarPorEmail(email) {
-        baseQuery('SELECT * FROM usuario WHERE email= ?', email)
+        return baseQuery('SELECT * FROM usuario WHERE email= ?', email)
+    }
+
+    atualizar(usuario){
+        return baseQuery('UPDATE usuario SET ? WHERE id = ?',
+        [usuario,usuario.id])
+    }
+
+    detelar(id){
+        return baseQuery('DELETE FROM usuario WHERE id = ?', id)
     }
 }
 
-module.exports = new Usuarios()
+module.exports = Usuarios
